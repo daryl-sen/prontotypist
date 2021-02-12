@@ -1,4 +1,3 @@
-console.log('index loaded');  
 const sentence = 'The quick brown fox jumps over the lazy dog.';
 const refSentenceArr = sentence.split(' ');
 
@@ -12,8 +11,6 @@ let incompleteWords = [];
 for (let i = 1; i < refSentenceArr.length; i++) {
   incompleteWords.push(refSentenceArr[i]);
 }
-
-console.log(incompleteWords);
 
 // identify the containers
 const referenceBox = document.getElementById('reference-text');
@@ -52,10 +49,15 @@ const checkProgress = function() {
   const targetWord = checkWord(typedWord, reference);
 
   if (targetWord.passed) {
+    typingField.value = '';
+    if (incompleteWords.length === 0) {
+      typingField.disabled = true;
+      typingField.value = 'Done!';
+      return;
+    }
     completeWords.push(refSentenceArr[cursor]);
     incompleteWords.splice(0, 1); // remove the first word
     cursor++;
-    typingField.value = '';
     referenceBox.innerHTML = 
       `<span class="complete">${completeWords.join(' ')}</span>` +
       ` ${refSentenceArr[cursor]} ` +
@@ -65,8 +67,8 @@ const checkProgress = function() {
       `<span class="complete">${completeWords.join(' ')}</span>` +
       ` ${targetWord.result} ` +
       `<span class="complete">${incompleteWords.join(' ')}</span>`;
-  }
-  
-
-  
+  }  
 };
+
+// add keyup event listener to the typing field
+typingField.addEventListener('keyup', checkProgress);
