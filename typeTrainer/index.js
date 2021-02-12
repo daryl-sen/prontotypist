@@ -9,9 +9,11 @@ let currentWord = refSentenceArr[cursor];
 // initial condition
 let completeWords = [];
 let incompleteWords = [];
-for (const word of refSentenceArr) {
-  incompleteWords.push(word);
+for (let i = 1; i < refSentenceArr.length; i++) {
+  incompleteWords.push(refSentenceArr[i]);
 }
+
+console.log(incompleteWords);
 
 // identify the containers
 const referenceBox = document.getElementById('reference-text');
@@ -54,20 +56,20 @@ const checkProgress = function() {
 
   // console.log(`typed word: '${typedWord}', reference: '${reference}'`);
 
-  // if (targetWord.passed) {
-  //   completeWords.push(refSentenceArr[cursor]);
-  //   incompleteWords.splice(0, 1); // remove the first word
-  //   cursor++;
-  //   reference.innerHTML = 
-  //     `<span class="complete">${completeWords.join(' ')}</span>` +
-  //     refSentenceArr[cursor] +
-  //     `<span class="complete">${incompleteWords.join(' ')}</span>`;
-  // } else {
-  //   reference.innerHTML = 
-  //     `<span class="complete">${completeWords.join(' ')}</span>` +
-  //     targetWord.result +
-  //     `<span class="complete">${incompleteWords.join(' ')}</span>`;
-  // }
+  if (targetWord.passed) {
+    completeWords.push(refSentenceArr[cursor]);
+    incompleteWords.splice(0, 1); // remove the first word
+    cursor++;
+    referenceBox.innerHTML = 
+      `<span class="complete">${completeWords.join(' ')}</span>` +
+      ` ${refSentenceArr[cursor]} ` +
+      `<span class="complete">${incompleteWords.join(' ')}</span>`;
+  } else {
+    referenceBox.innerHTML = 
+      `<span class="complete">${completeWords.join(' ')}</span>` +
+      ` ${targetWord.result} ` +
+      `<span class="complete">${incompleteWords.join(' ')}</span>`;
+  }
   
 
   
