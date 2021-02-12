@@ -1,4 +1,3 @@
-const sentence = 'The quick brown fox jumps over the lazy dog.';
 const refSentenceArr = sentence.split(' ');
 
 // cursor tracks which word is being typed
@@ -15,6 +14,8 @@ for (let i = 1; i < refSentenceArr.length; i++) {
 // identify the containers
 const referenceBox = document.getElementById('reference-text');
 const typingField = document.getElementById('typing-field');
+
+referenceBox.innerHTML = sentence;
 
 // helper function - check if word is correct
 const checkWord = function(typed, reference, addSpace) {

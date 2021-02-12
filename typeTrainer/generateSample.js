@@ -1,2 +1,2 @@
 // hardcoded text for now
-const typeSample = 'A quick brown fox jumps over the lazy dog';
+const sentence = 'A quick brown fox jumps over the lazy dog.';
