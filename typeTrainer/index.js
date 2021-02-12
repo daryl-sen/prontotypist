@@ -17,9 +17,10 @@ const referenceBox = document.getElementById('reference-text');
 const typingField = document.getElementById('typing-field');
 
 // helper function - check if word is correct
-const checkWord = function(typed, reference) {
-  // add a space to both
-  reference += ' ';
+const checkWord = function(typed, reference, addSpace) {
+  if (addSpace) {
+    reference += ' ';
+  }
 
   let output = '';
 
@@ -46,7 +47,11 @@ const checkWord = function(typed, reference) {
 const checkProgress = function() {
   const typedWord = typingField.value;
   const reference = refSentenceArr[cursor];
-  const targetWord = checkWord(typedWord, reference);
+  if (incompleteWords.length === 0) {
+    console.log('last word!');
+    const targetWord = checkWord(typedWord, reference, false);
+  }
+  const targetWord = checkWord(typedWord, reference, true);
 
   if (targetWord.passed) {
     typingField.value = '';

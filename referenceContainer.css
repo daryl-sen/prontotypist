@@ -1,0 +1,16 @@
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+  background-color:yellow;
+}
+
+.complete {
+  color: lightgray;
+}
+
+.incomplete {
+  color: gray;
+}
