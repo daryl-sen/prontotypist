@@ -1,4 +1,5 @@
-const sentence = 'This is my sentence.';
+console.log('index loaded');  
+const sentence = 'The quick brown fox jumps over the lazy dog.';
 const refSentenceArr = sentence.split(' ');
 
 // cursor tracks which word is being typed
@@ -12,6 +13,9 @@ for (const word of refSentenceArr) {
   incompleteWords.push(word);
 }
 
+// identify the containers
+const referenceBox = document.getElementById('reference-text');
+const typingField = document.getElementById('typing-field');
 
 // helper function - check if word is correct
 const checkWord = function(typed, reference) {
@@ -36,14 +40,35 @@ const checkWord = function(typed, reference) {
     }
   }
 
-  return {passed: true, result: output};
+  return {passed: false, result: output};
 };
 
 
 // runs on key up of the typing box
-const checkProgress = function(typedEntry) => {
-  const typedWord = document.getElementById('typing-field');
+const checkProgress = function() {
+  const typedWord = typingField.value;
   const reference = refSentenceArr[cursor];
-  const targetWord = checkWord();
+  const targetWord = checkWord(typedWord, reference);
+
+  document.getElementById('tester').innerHTML = targetWord.result;
+
+  // console.log(`typed word: '${typedWord}', reference: '${reference}'`);
+
+  // if (targetWord.passed) {
+  //   completeWords.push(refSentenceArr[cursor]);
+  //   incompleteWords.splice(0, 1); // remove the first word
+  //   cursor++;
+  //   reference.innerHTML = 
+  //     `<span class="complete">${completeWords.join(' ')}</span>` +
+  //     refSentenceArr[cursor] +
+  //     `<span class="complete">${incompleteWords.join(' ')}</span>`;
+  // } else {
+  //   reference.innerHTML = 
+  //     `<span class="complete">${completeWords.join(' ')}</span>` +
+  //     targetWord.result +
+  //     `<span class="complete">${incompleteWords.join(' ')}</span>`;
+  // }
+  
+
   
 };
