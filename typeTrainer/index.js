@@ -25,7 +25,7 @@ const checkWord = function(typed, reference, addSpace) {
 
   let output = '';
 
-  // check for passed condition, terminate early if possible
+  // check for passing condition, terminate early if possible
   if (typed === reference) {
     output = `<span class="correct">${reference} </span>`;
     return {passed: true, result: output};
@@ -77,4 +77,4 @@ const checkProgress = function() {
 };
 
 // add keyup event listener to the typing field
-typingField.addEventListener('keyup', checkProgress);
+typingField.addEventListener('keydown', checkProgress);
