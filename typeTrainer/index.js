@@ -22,7 +22,6 @@ const typingField = document.getElementById('typing-field');
 // helper function - check if word is correct
 const checkWord = function(typed, reference) {
   // add a space to both
-  typed += ' ';
   reference += ' ';
 
   let output = '';
@@ -52,14 +51,11 @@ const checkProgress = function() {
   const reference = refSentenceArr[cursor];
   const targetWord = checkWord(typedWord, reference);
 
-  document.getElementById('tester').innerHTML = targetWord.result;
-
-  // console.log(`typed word: '${typedWord}', reference: '${reference}'`);
-
   if (targetWord.passed) {
     completeWords.push(refSentenceArr[cursor]);
     incompleteWords.splice(0, 1); // remove the first word
     cursor++;
+    typingField.value = '';
     referenceBox.innerHTML = 
       `<span class="complete">${completeWords.join(' ')}</span>` +
       ` ${refSentenceArr[cursor]} ` +
