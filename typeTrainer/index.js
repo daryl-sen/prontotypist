@@ -1,4 +1,13 @@
-const refSentenceArr = sentence.split(' ');
+// create an array of the words in the sentence
+let refSentenceArr = sentence.split(' ');
+// add spaces to each word except the last word
+refSentenceArr = refSentenceArr.map((word) => {
+  if (word !== refSentenceArr[refSentenceArr.length - 1]) {
+    return word += ' ';
+  } else {
+    return word;
+  }
+});
 
 // cursor tracks which word is being typed
 let cursor = 0;
@@ -18,11 +27,7 @@ const typingField = document.getElementById('typing-field');
 referenceBox.innerHTML = sentence;
 
 // helper function - check if word is correct
-const checkWord = function(typed, reference, addSpace) {
-  if (addSpace) {
-    reference += ' ';
-  }
-
+const checkWord = function(typed, reference) {
   let output = '';
 
   // check for passing condition, terminate early if possible
@@ -43,22 +48,23 @@ const checkWord = function(typed, reference, addSpace) {
   return {passed: false, result: output};
 };
 
+const renderSuccess = function() {
+  referenceBox.innerHTML = sentence;
+  typingField.disabled = true;
+  typingField.value = 'Done!';
+};
+
 
 // runs on key up of the typing box
 const checkProgress = function() {
   const typedWord = typingField.value;
   const reference = refSentenceArr[cursor];
-  if (incompleteWords.length === 0) {
-    console.log('last word!');
-    const targetWord = checkWord(typedWord, reference, false);
-  }
-  const targetWord = checkWord(typedWord, reference, true);
+  const targetWord = checkWord(typedWord, reference);
 
   if (targetWord.passed) {
     typingField.value = '';
     if (incompleteWords.length === 0) {
-      typingField.disabled = true;
-      typingField.value = 'Done!';
+      renderSuccess();
       return;
     }
     completeWords.push(refSentenceArr[cursor]);
@@ -77,4 +83,5 @@ const checkProgress = function() {
 };
 
 // add keyup event listener to the typing field
-typingField.addEventListener('keydown', checkProgress);
+typingField.addEventListener('keyup', checkProgress);
+typingField.addEventListener('keypress', checkProgress);
