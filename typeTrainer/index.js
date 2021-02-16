@@ -83,5 +83,6 @@ const checkProgress = function() {
 };
 
 // add keyup event listener to the typing field
+// typingField.addEventListener('change', checkProgress);
 typingField.addEventListener('keyup', checkProgress);
 typingField.addEventListener('keypress', checkProgress);
